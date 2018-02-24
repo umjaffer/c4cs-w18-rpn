@@ -32,6 +32,10 @@ class TestBasics(unittest.TestCase):
         self.assertEqual([2, 2, 4, 6], result)
         result = rpn.calculate("4 66 4 copy")
         self.assertEqual([4, 4, 66, 4], result)
+        result = rpn.calculate("1 2 3 copy")
+        self.assertEqual([1, 1, 2, 3], result)
+        result = rpn.calculate("100 100 100 copy")
+        self.assertEqual([100, 100, 100, 100], result)
     def test_factorial(self):
         result = rpn.calculate("4 !")
         self.assertEqual(24, result)
@@ -39,3 +43,7 @@ class TestBasics(unittest.TestCase):
         self.assertEqual(40320, result)
         result = rpn.calculate("5 !")
         self.assertEqual(120, result)
+        result = rpn.calculate("0 !")
+        self.assertEqual(1, result)
+        result = rpn.calculate("1 !")
+        self.assertEqual(1, result)
