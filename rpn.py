@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 import operator
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 operators = {
     '+': operator.add,
@@ -22,7 +25,7 @@ def calculate(myarg):
             arg1 = stack.pop()
             result = function(arg1, arg2)
             stack.append(result)
-        print(stack)
+        logging.debug(stack)
     if len(stack) != 1:
         raise TypeError("Too many parameters")
     return stack.pop()
