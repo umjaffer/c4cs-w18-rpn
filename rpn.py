@@ -33,10 +33,19 @@ def calculate(myarg):
                 stack.append(token)
             except ValueError:
                 result = stack[::-1]
-                # stack[:] = []
-                # stack = result
             logging.debug(stack)
         return result
+    elif myarg.split()[-1] == 'copy':
+        for token in myarg.split():
+            try:
+                token = int(token)
+                stack.append(token)
+            except ValueError:
+                stack = stack[::-1]
+                stack.append(stack[-1])
+                stack = stack[::-1]
+            logging.debug(stack)
+        return stack
     elif len(myarg.split()) == 3:
         for token in myarg.split():
             try:

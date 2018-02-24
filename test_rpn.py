@@ -27,13 +27,12 @@ class TestBasics(unittest.TestCase):
         self.assertEqual([1, 2, 3, 4, 5, 6, 7], result)
         result = rpn.calculate("2 4 6 rotate")
         self.assertEqual([6, 4, 2], result)
-    # def test_copy(self):
-    #     result = rpn.calculate("2 4 6 copy")
-    #     self.assertEqual([2, 2, 4, 6], result)
-    #     result = rpn.calculate("4 66 4 copy")
-    #     self.assertEqual([4, 4, 66, 4], result)
+    def test_copy(self):
+        result = rpn.calculate("2 4 6 copy")
+        self.assertEqual([2, 2, 4, 6], result)
+        result = rpn.calculate("4 66 4 copy")
+        self.assertEqual([4, 4, 66, 4], result)
     def test_factorial(self):
-        # print("testing factorial function...")
         result = rpn.calculate("4 !")
         self.assertEqual(24, result)
         result = rpn.calculate("8 !")
