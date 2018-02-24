@@ -16,7 +16,28 @@ operators = {
 
 def calculate(myarg):
     stack = list()
-    if len(myarg.split()) == 3:
+    if len(myarg.split()) == 2 and myarg.split()[-1] == '!':
+        for token in myarg.split():
+            try:
+                token = int(token)
+                stack.append(token)
+            except ValueError:
+                arg1 = stack.pop()
+                result = math.factorial(arg1)
+                stack.append(result)
+            logging.debug(stack)
+    elif myarg.split()[-1] == 'rotate':
+        for token in myarg.split():
+            try:
+                token = int(token)
+                stack.append(token)
+            except ValueError:
+                result = stack[::-1]
+                # stack[:] = []
+                # stack = result
+            logging.debug(stack)
+        return result
+    elif len(myarg.split()) == 3:
         for token in myarg.split():
             try:
                 token = int(token)
@@ -26,16 +47,6 @@ def calculate(myarg):
                 arg2 = stack.pop()
                 arg1 = stack.pop()
                 result = function(arg1, arg2)
-                stack.append(result)
-            logging.debug(stack)
-    elif len(myarg.split()) == 2 and myarg.split()[-1] == '!':
-        for token in myarg.split():
-            try:
-                token = int(token)
-                stack.append(token)
-            except ValueError:
-                arg1 = stack.pop()
-                result = math.factorial(arg1)
                 stack.append(result)
             logging.debug(stack)
     if len(stack) != 1:
