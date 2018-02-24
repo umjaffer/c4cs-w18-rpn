@@ -2,6 +2,7 @@
 
 import operator
 import logging
+import math
 
 logging.basicConfig(level=logging.INFO)
 
@@ -15,17 +16,28 @@ operators = {
 
 def calculate(myarg):
     stack = list()
-    for token in myarg.split():
-        try:
-            token = int(token)
-            stack.append(token)
-        except ValueError:
-            function = operators[token]
-            arg2 = stack.pop()
-            arg1 = stack.pop()
-            result = function(arg1, arg2)
-            stack.append(result)
-        logging.debug(stack)
+    if len(myarg.split()) == 3:
+        for token in myarg.split():
+            try:
+                token = int(token)
+                stack.append(token)
+            except ValueError:
+                function = operators[token]
+                arg2 = stack.pop()
+                arg1 = stack.pop()
+                result = function(arg1, arg2)
+                stack.append(result)
+            logging.debug(stack)
+    elif len(myarg.split()) == 2 and myarg.split()[-1] == '!':
+        for token in myarg.split():
+            try:
+                token = int(token)
+                stack.append(token)
+            except ValueError:
+                arg1 = stack.pop()
+                result = math.factorial(arg1)
+                stack.append(result)
+            logging.debug(stack)
     if len(stack) != 1:
         raise TypeError("Too many parameters")
     return stack.pop()
